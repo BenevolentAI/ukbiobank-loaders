@@ -1,0 +1,9 @@
+-c requirements.txt
+
+flake8==3.7.9
+flake8-black==0.1.1
+mypy>=0.790
+pytest>=3.6.3
+pytest-cov==2.8.1
+pytest-mock>=2.0.0
+pytest-rerunfailures>=4.2
