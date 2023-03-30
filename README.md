@@ -162,7 +162,7 @@ Method that fetches death information for the UKBB population.
 
 <a id="ukbb_loaders.loaders.load.DataLoader.get_gp_clinical_data"></a>
 
-#### get\_gp\_data
+#### get\_gp\_clinical\_data
 
 ```python
 def get_gp_clinical_data(source=None, patient_list: np.ndarray = None)
@@ -198,3 +198,5 @@ def get_gp_medication_data(patient_list: np.ndarray = None) -> pd.DataFrame
 - `df` _pandas dataframe_ : A canonical long dataframe with patients as the index and
   features as columns.
 
+## Acknowledgments
+This package is developed using the UK Biobank Resource under Application Number 43138.
