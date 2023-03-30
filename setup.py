@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from pathlib import Path
+
 from setuptools import setup, find_packages
 import re
 import io
@@ -16,6 +18,8 @@ def setup_package():
         author="BenevolentAI",
         author_email="ukbiobank.loaders@benevolent.ai",
         description="Utility package for handling UK Biobank data",
+        long_description=Path("README.md").read_text(encoding="utf-8"),
+        long_description_content_type="text/markdown",
         license="MIT",
         packages=find_packages(include=["ukbb_loaders", "ukbb_loaders.*", "ukbb_parser", "ukbb_parser.*"]),
         package_data={'': ['*.json', '*.parquet', '*.csv']},
