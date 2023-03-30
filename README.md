@@ -162,7 +162,7 @@ Method that fetches death information for the UKBB population.
 
 <a id="ukbb_loaders.loaders.load.DataLoader.get_gp_clinical_data"></a>
 
-#### get\_gp\_data
+#### get\_gp\_clinical\_data
 
 ```python
 def get_gp_clinical_data(source=None, patient_list: np.ndarray = None)
