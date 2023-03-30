@@ -198,3 +198,5 @@ def get_gp_medication_data(patient_list: np.ndarray = None) -> pd.DataFrame
 - `df` _pandas dataframe_ : A canonical long dataframe with patients as the index and
   features as columns.
 
+## Acknowledgments
+This package is developed using the UK Biobank Resource under Application Number 43138.
