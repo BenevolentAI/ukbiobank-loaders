@@ -261,3 +261,5 @@ Method that fetches GP medication data for the UKBB population.
 - `df` _pd.DataFrame_ - A canonical long dataframe with patients as the index and
   features as columns.
 
+## Acknowledgments
+This package is developed using the UK Biobank Resource under Application Number 43138.
