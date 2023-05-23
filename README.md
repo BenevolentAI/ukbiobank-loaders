@@ -63,23 +63,80 @@ eid
 48     1981-04-08  icd10    N181      1
 ```
 
-### Documentation for ukbb\_loaders.loaders.load
+### Documentation for ukbb\_loaders.loaders
 
-#### Table of Contents
+### Table of Contents
 
-* [DataLoader](#ukbb_loaders.loaders.load.DataLoader)
-  * [\_\_init\_\_](#ukbb_loaders.loaders.load.DataLoader.__init__)
-  * [get\_hospital\_data](#ukbb_loaders.loaders.load.DataLoader.get_hospital_data)
-  * [get\_death\_data](#ukbb_loaders.loaders.load.DataLoader.get_death_data)
-  * [get\_gp\_clinical\_data](#ukbb_loaders.loaders.load.DataLoader.get_gp_clinical_data)
-  * [get\_gp\_medication\_data](#ukbb_loaders.loaders.load.DataLoader.get_gp_medication_data)
+* [ukbb\_loaders.utilities.util](#ukbb_loaders.utilities.util)
+  * [load\_lookup](#ukbb_loaders.utilities.util.load_lookup)
+  * [load\_mapper](#ukbb_loaders.utilities.util.load_mapper)
+* [ukbb\_loaders.loaders.load](#ukbb_loaders.loaders.load)
+  * [DataLoader](#ukbb_loaders.loaders.load.DataLoader)
+    * [\_\_init\_\_](#ukbb_loaders.loaders.load.DataLoader.__init__)
+    * [get\_hospital\_data](#ukbb_loaders.loaders.load.DataLoader.get_hospital_data)
+    * [get\_death\_data](#ukbb_loaders.loaders.load.DataLoader.get_death_data)
+    * [get\_gp\_clinical\_data](#ukbb_loaders.loaders.load.DataLoader.get_gp_clinical_data)
+    * [get\_gp\_medication\_data](#ukbb_loaders.loaders.load.DataLoader.get_gp_medication_data)
 
+<a id="ukbb_loaders"></a>
+
+### ukbb\_loaders.utilities.util
+
+<a id="ukbb_loaders.utilities.util.load_lookup"></a>
+
+#### load\_lookup
+
+```python
+def load_lookup(lookup_name: str) -> pd.DataFrame
+```
+
+Loads lookup table.
+
+**Arguments**:
+
+- `lookup_name` _str_ - The name of the lookup table to be loaded.
+  
+
+**Returns**:
+
+- `(pd.DataFrame)` - The lookup table of interest.
+  
+
+**Example**:
+  Load lookup of ICD10 diagnosis codes:
+  >>> load_lookup("ehr_diagnosis_icd10")
+  
+
+<a id="ukbb_loaders.utilities.util.load_mapper"></a>
+
+#### load\_mapper
+
+```python
+def load_mapper(mapper_name: str) -> pd.DataFrame
+```
+Loads ontology mapper.
+
+**Arguments**:
+
+- `mapper_name` _str_ - The name of the mapper to be loaded.
+
+**Returns**:
+
+- `(pd.DataFrame)` - The mapper of interest.
+  
+
+**Example**:
+  Load mapping from ICD10 codes to Phecodes:
+  >>> load_mapper("icd10_to_phecodes")
+  
+
+### ukbb\_loaders.loaders.load
 
 Loaders for versioned UKBB data.
 
 <a id="ukbb_loaders.loaders.load.DataLoader"></a>
 
-#### DataLoader Objects
+### DataLoader Objects
 
 ```python
 class DataLoader()
@@ -97,8 +154,9 @@ Class for loading UKBB data.
 
 **Arguments**:
 
-- `data_dir` _str_ - The path to the directory containing the processed data. Note that on Windows the path must
-  have forward slashes, e.g.  "C:/Users/john/Documents/data_dir"
+- `data_dir` _str_ - The path to the directory containing the processed data.
+  Note that on Windows the path must have forward-slashes,
+  e.g.  "C:/Users/john/Documents/data_dir"
 
 <a id="ukbb_loaders.loaders.load.DataLoader.get_hospital_data"></a>
 
@@ -110,27 +168,29 @@ def get_hospital_data(source: Union[str, List[str]],
                       patient_list: np.ndarray = None) -> pd.DataFrame
 ```
 
+Method that fetches hospital data for the UKBB population.
+
 **Arguments**:
 
 - `source` _str or list_ - The coding/representation/source we would like to fetch.
   It needs to be one or more of:
-  - `icd10` - for fetching all icd10 related diagnoses.
-  - `icd9` - for fetching all icd9 related diagnoses.
-  - `opcs3` - for fetching all opcs4 related operational codes.
-  - `opcs4` - for fetching all opcs4 related operational codes.
+- `icd10` - for fetching all icd10 related diagnoses.
+- `icd9` - for fetching all icd9 related diagnoses.
+- `opcs3` - for fetching all opcs4 related operational codes.
+- `opcs4` - for fetching all opcs4 related operational codes.
 - `level` _list or string_ - The level/significance of diagnoses we would like to fetch.
   It needs to be one or both of:
-  - `primary` - for fetching only the primary code related to one diagnosis.
-  - `secondary` - for fetching all the secondary (complementary) codes for one
-    diagnosis.
-  - `external` - For fetching diagnosis codes from external sources.
-    Defaults to all of them.
+- `primary` - for fetching only the primary code related to one diagnosis.
+- `secondary` - for fetching all the secondary (complementary) codes for one
+  diagnosis.
+- `external` - For fetching diagnosis codes from external sources.
+  Defaults to all of them.
 - `patient_list` _np.ndarray_ - The patients to fetch characteristics for. If this is empty,
   all UKBB patients will be used.
 
 **Returns**:
 
-- `df` _pandas dataframe_ - A long canonical dataframe with patients as the index and the
+- `df` _pd.DataFrame_ - A long canonical dataframe with patients as the index and the
   following columns:
   - date_of_visit: pandas datetime for each hospital visit
   - feature: the different codes used (e.g. the different icd10 codes)
@@ -157,7 +217,7 @@ Method that fetches death information for the UKBB population.
 
 **Returns**:
 
-- `df` _pandas dataframe_ : A long canonical dataframe with patients as the index and all
+- `df` _pd.DataFrame_ - A long canonical dataframe with patients as the index and all
   recorded death information including death date in the right format.
 
 <a id="ukbb_loaders.loaders.load.DataLoader.get_gp_clinical_data"></a>
@@ -168,7 +228,7 @@ Method that fetches death information for the UKBB population.
 def get_gp_clinical_data(source=None, patient_list: np.ndarray = None)
 ```
 
-Method that fetches gp diagnosis information for the UKBB population.
+Method that fetches GP diagnosis information for the UKBB population.
 
 **Arguments**:
 
@@ -178,7 +238,7 @@ Method that fetches gp diagnosis information for the UKBB population.
 
 **Returns**:
 
-- `df` _pandas dataframe_: A long canonical dataframe with patients as the index and all
+- `df` _pd.DataFrame_ - A long canonical dataframe with patients as the index and all
   recorded gp information including date in the right format.
 
 <a id="ukbb_loaders.loaders.load.DataLoader.get_gp_medication_data"></a>
@@ -189,14 +249,15 @@ Method that fetches gp diagnosis information for the UKBB population.
 def get_gp_medication_data(patient_list: np.ndarray = None) -> pd.DataFrame
 ```
 
+Method that fetches GP medication data for the UKBB population.
+
 **Arguments**:
 
 - `patient_list` _np.ndarray_ - The patients to fetch medication data for.
   If this is empty, all UKBB patients will be used.
 
 **Returns**:
-- `df` _pandas dataframe_ : A canonical long dataframe with patients as the index and
+
+- `df` _pd.DataFrame_ - A canonical long dataframe with patients as the index and
   features as columns.
 
-## Acknowledgments
-This package is developed using the UK Biobank Resource under Application Number 43138.
