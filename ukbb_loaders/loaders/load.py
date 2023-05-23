@@ -22,8 +22,9 @@ class DataLoader:
         """
         Class for loading UKBB data.
         Args:
-            data_dir (str): The path to the directory containing the processed data. Note that on Windows the path must
-            have forward-slashes, e.g.  "C:/Users/john/Documents/data_dir"
+            data_dir (str): The path to the directory containing the processed data.
+            Note that on Windows the path must have forward-slashes,
+            e.g.  "C:/Users/john/Documents/data_dir"
         """
         self.data_path = self._check_if_exists(data_dir=data_dir)
         self.hospital_map = {
@@ -62,6 +63,8 @@ class DataLoader:
             patient_list: np.ndarray = None,
     ) -> pd.DataFrame:
         """
+        Method that fetches hospital data for the UKBB population.
+
         Args:
             source (str or list): The coding/representation/source we would like to fetch.
                 It needs to be one or more of:
@@ -79,7 +82,7 @@ class DataLoader:
             patient_list (np.ndarray): The patients to fetch characteristics for. If this is empty,
                 all UKBB patients will be used.
         Returns:
-            df (pandas dataframe): A long canonical dataframe with patients as the index and the
+            df (pd.DataFrame): A long canonical dataframe with patients as the index and the
             following columns:
                 - date_of_visit: pandas datetime for each hospital visit
                 - feature: the different codes used (e.g. the different icd10 codes)
@@ -123,7 +126,7 @@ class DataLoader:
             patient_list (np.ndarray): The patients to fetch characteristics for.
                 If this is empty, all UKBB patients will be used.
         Returns:
-            df (pandas dataframe): A long canonical dataframe with patients as the index and all
+            df (pd.DataFrame): A long canonical dataframe with patients as the index and all
                 recorded death information including death date in the right format.
         """
         if level is None:
@@ -148,13 +151,14 @@ class DataLoader:
             patient_list: np.ndarray = None
     ):
         """
-        Method that fetches gp diagnosis information for the UKBB population.
+        Method that fetches GP diagnosis information for the UKBB population.
+
         Args:
             source (str or list): Whether to load read_2, read_3 or both. Defaults to both.
             patient_list (np.ndarray): The patients to fetch characteristics for.
                 If this is empty, all UKBB patients will be used.
         Returns:
-            df (pandas dataframe): A long canonical dataframe with patients as the index and all
+            df (pd.DataFrame): A long canonical dataframe with patients as the index and all
                 recorded gp information including date in the right format.
         """
         # Check if source got one of the accepted values
@@ -177,11 +181,13 @@ class DataLoader:
 
     def get_gp_medication_data(self, patient_list: np.ndarray = None) -> pd.DataFrame:
         """
+        Method that fetches GP medication data for the UKBB population.
+
         Args:
             patient_list (np.ndarray): The patients to fetch medication data for.
                 If this is empty, all UKBB patients will be used.
         Returns:
-            df (pandas dataframe): A canonical long dataframe with patients as the index and
+            df (pd.DataFrame): A canonical long dataframe with patients as the index and
                 features as columns.
         """
         df = pd.read_parquet(pjoin(self.data_path, "gp_medications.parquet"))
